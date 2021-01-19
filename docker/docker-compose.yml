@@ -1,0 +1,24 @@
+version: "3.7"
+
+services:
+  app-server:
+    container_name: home-budget-dev
+    build:
+      context: ..
+      dockerfile: ./docker/Dockerfile
+    environment:
+      SPRING_PROFILES_ACTIVE: dev 
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    restart: always
+    command: ["postgres", "-c", "log_statement=all", "-c", "log_destination=stderr"]
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: homebudgetdb

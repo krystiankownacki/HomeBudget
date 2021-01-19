@@ -1,0 +1,17 @@
+spring:
+    profiles:
+        active: local_config
+    datasource:
+        url: jdbc:postgresql://localhost:5432/homebudgetdb?useSSL=false
+        username: postgres
+        password: password
+        hikari:
+            data-source-properties:
+                stringtype: unspecified
+    jpa:
+        database-platform:  org.hibernate.dialect.PostgreSQLDialect
+        show-sql: false
+        open-in-view: false
+        hibernate:
+            ddl-auto: create
+          
