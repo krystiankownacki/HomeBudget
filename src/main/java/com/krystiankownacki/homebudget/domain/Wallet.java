@@ -7,8 +7,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.Getter;
 
 @Data
+@Getter
 @Entity
 @Table(name = "WALLET")
 public class Wallet {

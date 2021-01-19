@@ -1,11 +1,12 @@
 spring:
     datasource:
-        url: jdbc:postgresql://postgresql:5432/homebudgetdb?useSSL=false
+        url: jdbc:postgresql://db:5432/homebudgetdb?useSSL=false
         username: postgres
         password: password
         hikari:
             data-source-properties:
                 stringtype: unspecified
+        driver-class-name: org.postgresql.Driver
     jpa:
         database-platform:  org.hibernate.dialect.PostgreSQLDialect
         show-sql: false
