@@ -1,25 +1,42 @@
 package com.krystiankownacki.homebudget.controller;
 
-import com.krystiankownacki.homebudget.domain.Wallet;
-import com.krystiankownacki.homebudget.domain.WalletRepository;
+import com.krystiankownacki.homebudget.domain.request.RechargeRequest;
+import com.krystiankownacki.homebudget.domain.request.TransferRequest;
+import com.krystiankownacki.homebudget.domain.response.BalanceResponse;
+import com.krystiankownacki.homebudget.domain.response.RechargeResponse;
+import com.krystiankownacki.homebudget.domain.response.TransferResponse;
+import com.krystiankownacki.homebudget.service.BalanceService;
+import com.krystiankownacki.homebudget.service.RechargeService;
+import com.krystiankownacki.homebudget.service.TransferService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@Slf4j
+import javax.validation.Valid;
+
+@Valid
 @RestController
 @RequiredArgsConstructor
 public class HomeBudgetController {
 
-    private final WalletRepository walletRepository;
+    private final RechargeService rechargeService;
+    private final BalanceService balanceService;
+    private final TransferService transferService;
 
-    @GetMapping("/hello")
-    public String hello() {
-        log.info("Saving to DB new Wallet");
-        var walletToSave = new Wallet();
-        Wallet wallet = walletRepository.save(walletToSave);
-        return "Saved to DB with ID: " + wallet.getId();
+    @PostMapping("/recharge")
+    public RechargeResponse rechargeRegister(@RequestBody @Valid RechargeRequest rechargeRequest) {
+        return rechargeService.recharge(rechargeRequest);
     }
 
+    @GetMapping("/balance")
+    public BalanceResponse getCurrentBalance() {
+        return balanceService.getBalanceForAllRegisters();
+    }
+
+    @PostMapping("/transfer")
+    public TransferResponse transferAmount(@RequestBody @Valid TransferRequest transferRequest) {
+        return transferService.transfer(transferRequest);
+    }
 }

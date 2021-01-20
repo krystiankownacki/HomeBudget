@@ -21,7 +21,9 @@ dependencies {
 	compile group: 'org.postgresql', name: 'postgresql', version: '42.2.18'
 	compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.0'
 	compile group: 'org.hibernate', name: 'hibernate-validator', version: '7.0.0.Final'
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.12.1'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.7.0'
 }
 
 test {
