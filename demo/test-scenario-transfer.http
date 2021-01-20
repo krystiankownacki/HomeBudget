@@ -5,5 +5,5 @@ Content-Type: application/json
 {
   "from": "Wallet",
   "to": "Insurance policy",
-  "amount": 100
+  "amount": 10000
 }

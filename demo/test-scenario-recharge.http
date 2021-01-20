@@ -4,5 +4,5 @@ Content-Type: application/json
 
 {
   "registerName": "Wallet",
-  "amount": 100
+  "amount": 10000
 }
