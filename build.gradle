@@ -5,6 +5,15 @@ plugins {
 	id 'java'
 }
 
+ext {
+	lombokVersion = '1.18.16'
+	postgresVersion = '42.2.18'
+	jaxbApiVersion = '2.3.0'
+	jacksonVersion = '2.12.1'
+	hibernateValidatorVersion = '7.0.0.Final'
+	junitVersion = '5.7.0'
+}
+
 group = 'com.krystiankownacki'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
@@ -14,16 +23,23 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-	compile group: 'org.projectlombok', name: 'lombok', version: '1.18.16'
-	compile group: 'org.postgresql', name: 'postgresql', version: '42.2.18'
-	compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.0'
-	compile group: 'org.hibernate', name: 'hibernate-validator', version: '7.0.0.Final'
-	compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.12.1'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.7.0'
+	implementation (
+			'org.springframework.boot:spring-boot-starter-data-jpa',
+			'org.springframework.boot:spring-boot-starter-web',
+			'org.springframework.boot:spring-boot-starter-jdbc'
+	)
+
+	compile(
+			"org.projectlombok:lombok:${lombokVersion}",
+			"org.postgresql:postgresql:${postgresVersion}",
+			"javax.xml.bind:jaxb-api:${jaxbApiVersion}",
+			"org.hibernate:hibernate-validator:${hibernateValidatorVersion}",
+			"com.fasterxml.jackson.core:jackson-core:${jacksonVersion}",
+
+	)
+
+	testImplementation ('org.springframework.boot:spring-boot-starter-test')
+	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
 
 test {
