@@ -1,9 +1,9 @@
 package com.krystiankownacki.homebudget.repository.entity;
 
-import javax.persistence.*;
-
 import lombok.Data;
 import lombok.Getter;
+
+import javax.persistence.*;
 
 @Data
 @Getter
@@ -13,6 +13,7 @@ public class Register {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "NUMERIC(19,0)")
     private Long id;
 
     @Column(name = "REGISTER_NAME")
