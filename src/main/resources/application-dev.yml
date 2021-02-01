@@ -8,7 +8,6 @@ spring:
                 stringtype: unspecified
         driver-class-name: org.postgresql.Driver
         initialization-mode: always
-        data: classpath:init_db.sql
     jpa:
         database-platform:  org.hibernate.dialect.PostgreSQLDialect
         show-sql: false

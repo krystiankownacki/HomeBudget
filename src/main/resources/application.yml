@@ -9,7 +9,6 @@ spring:
             data-source-properties:
                 stringtype: unspecified
         initialization-mode: always
-        data: classpath:init_db.sql
     jpa:
         database-platform:  org.hibernate.dialect.PostgreSQLDialect
         show-sql: false
