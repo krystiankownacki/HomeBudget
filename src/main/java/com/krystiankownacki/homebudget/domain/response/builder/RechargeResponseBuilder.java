@@ -1,4 +1,4 @@
-package com.krystiankownacki.homebudget.service.builder;
+package com.krystiankownacki.homebudget.domain.response.builder;
 
 import com.krystiankownacki.homebudget.domain.ResponseStatus;
 import com.krystiankownacki.homebudget.domain.response.RechargeResponse;
@@ -13,12 +13,6 @@ public class RechargeResponseBuilder {
                 .status(ResponseStatus.SUCCESS)
                 .register(register.getRegisterName())
                 .balance(register.getBalance())
-                .build();
-    }
-
-    public RechargeResponse buildFailureResponse() {
-        return RechargeResponse.builder()
-                .status(ResponseStatus.FAILED)
                 .build();
     }
 }

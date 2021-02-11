@@ -4,7 +4,7 @@ import com.krystiankownacki.homebudget.domain.exception.RegisterNotFoundExceptio
 import com.krystiankownacki.homebudget.domain.request.TransferRequest;
 import com.krystiankownacki.homebudget.domain.response.TransferResponse;
 import com.krystiankownacki.homebudget.repository.entity.Register;
-import com.krystiankownacki.homebudget.service.builder.TransferResponseBuilder;
+import com.krystiankownacki.homebudget.domain.response.builder.TransferResponseBuilder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

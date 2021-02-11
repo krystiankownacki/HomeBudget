@@ -13,7 +13,7 @@ public class TransferRequest {
     @NotNull
     private String to;
 
-    @NotNull
     @Min(1)
+    @NotNull
     private int amount;
 }

@@ -4,7 +4,7 @@ import com.krystiankownacki.homebudget.domain.exception.RegisterNotFoundExceptio
 import com.krystiankownacki.homebudget.domain.request.RechargeRequest;
 import com.krystiankownacki.homebudget.domain.response.RechargeResponse;
 import com.krystiankownacki.homebudget.repository.entity.Register;
-import com.krystiankownacki.homebudget.service.builder.RechargeResponseBuilder;
+import com.krystiankownacki.homebudget.domain.response.builder.RechargeResponseBuilder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -34,7 +34,6 @@ class RechargeServiceTest {
 
     @Mock
     private RechargeResponseBuilder rechargeResponseBuilder;
-    ;
 
     @InjectMocks
     private RechargeService rechargeService;
@@ -49,19 +48,6 @@ class RechargeServiceTest {
         RechargeResponse actual = rechargeService.recharge(rechargeRequest);
 
         verify(register).recharge(AMOUNT_TO_RECHARGE);
-
-        assertThat(actual).isEqualTo(rechargeResponse);
-    }
-
-    @Test
-    void rechargeFailed() {
-        when(rechargeRequest.getRegisterName()).thenReturn(NAME);
-        when(registerDatabaseService.findByName(NAME)).thenThrow(new RegisterNotFoundException(NAME));
-        when(rechargeResponseBuilder.buildFailureResponse()).thenReturn(rechargeResponse);
-
-        RechargeResponse actual = rechargeService.recharge(rechargeRequest);
-
-        verifyNoInteractions(register);
 
         assertThat(actual).isEqualTo(rechargeResponse);
     }

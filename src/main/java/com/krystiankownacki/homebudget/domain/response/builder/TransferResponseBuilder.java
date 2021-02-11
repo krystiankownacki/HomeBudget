@@ -1,4 +1,4 @@
-package com.krystiankownacki.homebudget.service.builder;
+package com.krystiankownacki.homebudget.domain.response.builder;
 
 import com.krystiankownacki.homebudget.domain.ResponseStatus;
 import com.krystiankownacki.homebudget.domain.response.TransferResponse;

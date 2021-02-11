@@ -2,6 +2,7 @@ package com.krystiankownacki.homebudget.service.builder;
 
 import com.krystiankownacki.homebudget.domain.ResponseStatus;
 import com.krystiankownacki.homebudget.domain.response.TransferResponse;
+import com.krystiankownacki.homebudget.domain.response.builder.TransferResponseBuilder;
 import com.krystiankownacki.homebudget.repository.entity.Register;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
