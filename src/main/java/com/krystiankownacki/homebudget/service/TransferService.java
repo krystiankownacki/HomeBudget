@@ -5,6 +5,7 @@ import com.krystiankownacki.homebudget.domain.request.TransferRequest;
 import com.krystiankownacki.homebudget.domain.response.TransferResponse;
 import com.krystiankownacki.homebudget.domain.response.builder.TransferResponseBuilder;
 import com.krystiankownacki.homebudget.repository.entity.Register;
+import com.krystiankownacki.homebudget.service.validator.TransferRequestValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -17,9 +18,11 @@ public class TransferService {
 
     private final RegisterDatabaseService registerDatabaseService;
     private final TransferResponseBuilder transferResponseBuilder;
+    private final TransferRequestValidator transferRequestValidator;
 
     @Transactional
     public TransferResponse transfer(TransferRequest transferRequest) {
+        transferRequestValidator.validate(transferRequest);
         Register from = registerDatabaseService.findByName(transferRequest.getFrom());
         Register to = registerDatabaseService.findByName(transferRequest.getTo());
         int amountToTransfer = transferRequest.getAmount();

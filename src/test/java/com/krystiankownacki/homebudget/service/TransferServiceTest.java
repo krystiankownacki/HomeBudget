@@ -5,6 +5,7 @@ import com.krystiankownacki.homebudget.domain.request.TransferRequest;
 import com.krystiankownacki.homebudget.domain.response.TransferResponse;
 import com.krystiankownacki.homebudget.domain.response.builder.TransferResponseBuilder;
 import com.krystiankownacki.homebudget.repository.entity.Register;
+import com.krystiankownacki.homebudget.service.validator.TransferRequestValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,8 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class TransferServiceTest {
@@ -40,6 +40,9 @@ class TransferServiceTest {
 
     @Mock
     private TransferResponseBuilder transferResponseBuilder;
+
+    @Mock
+    private TransferRequestValidator transferRequestValidator;
 
     @InjectMocks
     private TransferService transferService;

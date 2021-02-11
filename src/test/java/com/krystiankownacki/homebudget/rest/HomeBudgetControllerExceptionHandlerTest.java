@@ -28,4 +28,11 @@ class HomeBudgetControllerExceptionHandlerTest {
 
         assertThat(actual.getStatusCode()).isEqualTo(HttpStatus.NOT_ACCEPTABLE);
     }
+
+    @Test
+    void handleSelfTransferException() {
+        ResponseEntity<Object> actual = homeBudgetControllerExceptionHandler.handleSelfTransferException();
+
+        assertThat(actual.getStatusCode()).isEqualTo(HttpStatus.CONFLICT);
+    }
 }
