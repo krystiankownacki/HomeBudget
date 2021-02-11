@@ -1,5 +1,6 @@
 package com.krystiankownacki.homebudget.service;
 
+import com.krystiankownacki.homebudget.domain.exception.InsufficientBalanceException;
 import com.krystiankownacki.homebudget.domain.request.TransferRequest;
 import com.krystiankownacki.homebudget.domain.response.TransferResponse;
 import com.krystiankownacki.homebudget.domain.response.builder.TransferResponseBuilder;
@@ -29,7 +30,7 @@ public class TransferService {
             to.recharge(amountToTransfer);
             return transferResponseBuilder.buildSuccessfulResponse(from, to);
         } else {
-            return transferResponseBuilder.buildFailureResponse();
+            throw new InsufficientBalanceException(from.getRegisterName());
         }
     }
 }

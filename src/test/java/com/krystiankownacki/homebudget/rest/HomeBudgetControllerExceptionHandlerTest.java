@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class HomeBudgetControllerExceptionHandlerTest {
@@ -21,5 +20,12 @@ class HomeBudgetControllerExceptionHandlerTest {
         ResponseEntity<Object> actual = homeBudgetControllerExceptionHandler.handleRegisterNotFoundException();
 
         assertThat(actual.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+    }
+
+    @Test
+    void handleInsufficientBalanceException() {
+        ResponseEntity<Object> actual = homeBudgetControllerExceptionHandler.handleInsufficientBalanceException();
+
+        assertThat(actual.getStatusCode()).isEqualTo(HttpStatus.NOT_ACCEPTABLE);
     }
 }

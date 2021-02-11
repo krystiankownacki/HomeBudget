@@ -1,5 +1,6 @@
 package com.krystiankownacki.homebudget.rest;
 
+import com.krystiankownacki.homebudget.domain.exception.InsufficientBalanceException;
 import com.krystiankownacki.homebudget.domain.exception.RegisterNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,5 +13,10 @@ public class HomeBudgetControllerExceptionHandler {
     @ExceptionHandler(RegisterNotFoundException.class)
     public ResponseEntity<Object> handleRegisterNotFoundException() {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
+    @ExceptionHandler(InsufficientBalanceException.class)
+    public ResponseEntity<Object> handleInsufficientBalanceException() {
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
     }
 }

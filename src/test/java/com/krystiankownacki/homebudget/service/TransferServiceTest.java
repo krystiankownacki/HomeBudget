@@ -1,10 +1,10 @@
 package com.krystiankownacki.homebudget.service;
 
-import com.krystiankownacki.homebudget.domain.exception.RegisterNotFoundException;
+import com.krystiankownacki.homebudget.domain.exception.InsufficientBalanceException;
 import com.krystiankownacki.homebudget.domain.request.TransferRequest;
 import com.krystiankownacki.homebudget.domain.response.TransferResponse;
-import com.krystiankownacki.homebudget.repository.entity.Register;
 import com.krystiankownacki.homebudget.domain.response.builder.TransferResponseBuilder;
+import com.krystiankownacki.homebudget.repository.entity.Register;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -12,7 +12,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class TransferServiceTest {
@@ -61,34 +63,14 @@ class TransferServiceTest {
     }
 
     @Test
-    void transferMoneyFailedWhenOneRegisterIsWrong() {
-        when(transferRequest.getFrom()).thenReturn(FROM_REGISTER);
-        when(registerDatabaseService.findByName(FROM_REGISTER)).thenThrow(new RegisterNotFoundException(FROM_REGISTER));
-        when(transferResponseBuilder.buildFailureResponse()).thenReturn(transferResponse);
-
-        TransferResponse actual = transferService.transfer(transferRequest);
-
-        verifyNoInteractions(from);
-        verifyNoInteractions(to);
-
-        assertThat(actual).isEqualTo(transferResponse);
-    }
-
-    @Test
-    void transferMoneyFailedWhenRegistryHasNotEnoughBalance() {
+    void throwInsufficientBalanceExceptionWhenRegistryHasNotEnoughBalance() {
         when(transferRequest.getFrom()).thenReturn(FROM_REGISTER);
         when(transferRequest.getTo()).thenReturn(TO_REGISTER);
         when(transferRequest.getAmount()).thenReturn(AMOUNT);
         when(registerDatabaseService.findByName(FROM_REGISTER)).thenReturn(from);
         when(registerDatabaseService.findByName(TO_REGISTER)).thenReturn(to);
         when(from.canAfford(AMOUNT)).thenReturn(false);
-        when(transferResponseBuilder.buildFailureResponse()).thenReturn(transferResponse);
 
-        TransferResponse actual = transferService.transfer(transferRequest);
-
-        verifyNoMoreInteractions(from);
-        verifyNoInteractions(to);
-
-        assertThat(actual).isEqualTo(transferResponse);
+        assertThrows(InsufficientBalanceException.class, () -> transferService.transfer(transferRequest));
     }
 }
